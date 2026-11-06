@@ -1,0 +1,1350 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>國小六年級社會科（上）第一、二單元互動復習站</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#eff6ff',
+              100: '#dbeafe',
+              500: '#3b82f6',
+              600: '#2563eb',
+              700: '#1d4ed8'
+            },
+            accent: {
+              50: '#fffbeb',
+              100: '#fef3c7',
+              500: '#f59e0b',
+              600: '#d97706'
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&display=swap');
+    body {
+      font-family: 'Noto Sans TC', sans-serif;
+    }
+    .bounce-in {
+      animation: bounceIn 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    @keyframes bounceIn {
+      0% { opacity: 0; transform: scale(0.9); }
+      100% { opacity: 1; transform: scale(1); }
+    }
+    .custom-scroll::-webkit-scrollbar {
+      width: 6px;
+    }
+    .custom-scroll::-webkit-scrollbar-thumb {
+      background-color: #cbd5e1;
+      border-radius: 9999px;
+    }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col antialiased selection:bg-blue-100 selection:text-blue-800">
+
+  <!-- 頂部導覽列 -->
+  <header class="bg-white border-b border-slate-200 sticky top-0 z-30 shadow-xs">
+    <div class="max-w-5xl mx-auto px-4 h-16 flex items-center justify-between">
+      <div class="flex items-center space-x-3">
+        <span class="w-10 h-10 rounded-xl bg-blue-600 text-white flex items-center justify-center font-black text-xl shadow-md shadow-blue-200">
+          社
+        </span>
+        <div>
+          <h1 class="text-lg font-bold text-slate-800 leading-tight">國小社會6上 · 互動複習專區</h1>
+          <p class="text-xs text-slate-500">第一單元 民主政治 ✕ 第二單元 變遷與族群</p>
+        </div>
+      </div>
+      <div class="flex items-center space-x-2">
+        <button onclick="openDeployModal()" class="text-xs bg-slate-100 hover:bg-slate-200 text-slate-700 px-3 py-1.5 rounded-lg border border-slate-300 font-medium transition flex items-center gap-1.5">
+          <svg class="w-4 h-4 text-slate-600" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+          <span>部署至 GitHub</span>
+        </button>
+        <button onclick="toggleSound()" id="soundBtn" class="p-2 text-slate-500 hover:text-blue-600 rounded-lg hover:bg-slate-100 transition" title="開關音效">
+          <svg id="soundOnIcon" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"></path></svg>
+          <svg id="soundOffIcon" class="w-5 h-5 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z m12 0l-6-6m0 6l6-6"></path></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- 導航分頁 -->
+  <nav class="bg-white border-b border-slate-200">
+    <div class="max-w-5xl mx-auto px-4 flex space-x-1 sm:space-x-4 overflow-x-auto">
+      <button onclick="switchTab('notes')" id="tab-notes" class="tab-btn py-3.5 px-3 border-b-2 border-blue-600 text-blue-600 font-bold text-sm whitespace-nowrap flex items-center gap-1.5">
+        📚 1. 考前重點先複習
+      </button>
+      <button onclick="switchTab('fill')" id="tab-fill" class="tab-btn py-3.5 px-3 border-b-2 border-transparent text-slate-500 hover:text-slate-800 font-medium text-sm whitespace-nowrap flex items-center gap-1.5">
+        ✍️ 2. 關鍵字填空挑戰
+      </button>
+      <button onclick="switchTab('quiz')" id="tab-quiz" class="tab-btn py-3.5 px-3 border-b-2 border-transparent text-slate-500 hover:text-slate-800 font-medium text-sm whitespace-nowrap flex items-center gap-1.5">
+        🎯 3. 核心闖關選擇題
+      </button>
+      <button onclick="switchTab('timeline')" id="tab-timeline" class="tab-btn py-3.5 px-3 border-b-2 border-transparent text-slate-500 hover:text-slate-800 font-medium text-sm whitespace-nowrap flex items-center gap-1.5">
+        ⏳ 4. 歷史時序排排看
+      </button>
+      <button onclick="switchTab('classify')" id="tab-classify" class="tab-btn py-3.5 px-3 border-b-2 border-transparent text-slate-500 hover:text-slate-800 font-medium text-sm whitespace-nowrap flex items-center gap-1.5">
+        ⚖️ 5. 權利義務二選一
+      </button>
+    </div>
+  </nav>
+
+  <!-- 單元切換篩選列 -->
+  <div class="bg-slate-100 border-b border-slate-200 px-4 py-2.5">
+    <div class="max-w-5xl mx-auto flex items-center justify-between flex-wrap gap-2">
+      <div class="flex items-center gap-1 text-xs font-bold text-slate-600">
+        <span>🎯 選擇複習單元：</span>
+        <span id="current-unit-badge" class="px-2 py-0.5 rounded-md bg-blue-100 text-blue-800 text-[11px]">全部範圍</span>
+      </div>
+      <div class="flex items-center gap-1.5 sm:gap-2">
+        <button onclick="setUnitFilter('all')" id="unit-btn-all" class="unit-btn px-3 py-1.5 rounded-xl text-xs sm:text-sm font-bold bg-blue-600 text-white shadow-xs transition">
+          全部單元 (1+2)
+        </button>
+        <button onclick="setUnitFilter(1)" id="unit-btn-1" class="unit-btn px-3 py-1.5 rounded-xl text-xs sm:text-sm font-semibold bg-white text-slate-600 hover:bg-slate-50 border border-slate-200 transition">
+          📘 第一單元：民主政治與憲法
+        </button>
+        <button onclick="setUnitFilter(2)" id="unit-btn-2" class="unit-btn px-3 py-1.5 rounded-xl text-xs sm:text-sm font-semibold bg-white text-slate-600 hover:bg-slate-50 border border-slate-200 transition">
+          📙 第二單元：變遷與多元族群
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 主要內容區 -->
+  <main class="flex-1 max-w-5xl w-full mx-auto p-4 sm:p-6">
+
+    <!-- 模組 1：必考重點記憶卡 (預設首頁展示) -->
+    <section id="section-notes" class="space-y-6">
+      <!-- 快速口訣條 (第一單元) -->
+      <div id="note-unit1-banner" class="bg-gradient-to-r from-blue-600 to-indigo-600 rounded-3xl p-6 text-white shadow-md">
+        <div class="flex items-center justify-between flex-wrap gap-2">
+          <div>
+            <div class="text-xs uppercase tracking-wider text-blue-200 font-semibold">第一單元 記憶密技</div>
+            <h2 class="text-lg sm:text-xl font-extrabold mt-1">戰後歷史年代「加法與乘法」記憶法</h2>
+          </div>
+          <button onclick="switchTab('fill')" class="bg-white text-blue-700 hover:bg-blue-50 font-bold px-4 py-2 rounded-xl text-xs sm:text-sm shadow-xs transition">
+            複習完了，去挑戰填空題 ➔
+          </button>
+        </div>
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mt-4 text-center">
+          <div class="bg-white/10 backdrop-blur-md rounded-2xl p-2.5">
+            <div class="text-xs text-blue-200">民國34年</div>
+            <div class="font-bold text-sm mt-0.5">接收臺灣澎湖</div>
+          </div>
+          <div class="bg-white/10 backdrop-blur-md rounded-2xl p-2.5">
+            <div class="text-xs text-blue-200">+ 2年 = 民國36年</div>
+            <div class="font-bold text-sm mt-0.5">二二八事件</div>
+          </div>
+          <div class="bg-white/10 backdrop-blur-md rounded-2xl p-2.5">
+            <div class="text-xs text-blue-200">+ 2年 = 民國38年</div>
+            <div class="font-bold text-sm mt-0.5">實施戒嚴令</div>
+          </div>
+          <div class="bg-white/10 backdrop-blur-md rounded-2xl p-2.5">
+            <div class="text-xs text-blue-200">38 × 2 = 民國76年</div>
+            <div class="font-bold text-sm mt-0.5">政府宣布解嚴</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 第二單元 重點提示 Banner -->
+      <div id="note-unit2-banner" class="bg-gradient-to-r from-amber-500 to-orange-600 rounded-3xl p-6 text-white shadow-md">
+        <div class="flex items-center justify-between flex-wrap gap-2">
+          <div>
+            <div class="text-xs uppercase tracking-wider text-amber-200 font-semibold">第二單元 核心概念</div>
+            <h2 class="text-lg sm:text-xl font-extrabold mt-1">社會變遷 ✕ 尊重差異 ✕ 多元文化融合</h2>
+          </div>
+          <button onclick="switchTab('fill')" class="bg-white text-amber-800 hover:bg-amber-50 font-bold px-4 py-2 rounded-xl text-xs sm:text-sm shadow-xs transition">
+            前往第二單元填空練習 ➔
+          </button>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 mt-4 text-center">
+          <div class="bg-white/10 backdrop-blur-md rounded-2xl p-2.5">
+            <div class="text-xs text-amber-200">教育與自主</div>
+            <div class="font-bold text-sm mt-0.5">解除髮禁 · 實驗多元學習</div>
+          </div>
+          <div class="bg-white/10 backdrop-blur-md rounded-2xl p-2.5">
+            <div class="text-xs text-amber-200">家庭與性平</div>
+            <div class="font-bold text-sm mt-0.5">雙薪分擔 · 420性別平等教育日</div>
+          </div>
+          <div class="bg-white/10 backdrop-blur-md rounded-2xl p-2.5">
+            <div class="text-xs text-amber-200">族群與文化</div>
+            <div class="font-bold text-sm mt-0.5">萬金教堂 · 伊斯蘭開齋節 · 眷村文化</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 核心重點對照卡格 -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <!-- 卡片 1 (單元一) -->
+        <div id="note-card-1" class="note-card bg-white rounded-3xl p-6 border border-slate-200 shadow-xs space-y-3">
+          <div class="flex items-center gap-2">
+            <span class="w-8 h-8 rounded-lg bg-blue-100 text-blue-700 flex items-center justify-center font-bold text-xs">單元1</span>
+            <h3 class="font-bold text-base text-slate-800">憲法三大義務 vs 基本權利</h3>
+          </div>
+          <ul class="text-sm text-slate-600 space-y-2 list-disc list-inside leading-relaxed">
+            <li><strong class="text-slate-800">三大義務：</strong>納稅（維持建設）、服兵役（保衛國家）、受國民教育（6~15歲，亦是權利也是義務）。</li>
+            <li><strong class="text-slate-800">平等權：</strong>法律之前人人平等（身障保障、育嬰津貼為合理差別待遇）。</li>
+            <li><strong class="text-slate-800">自由權：</strong>人身、居住遷徙、言論出版、秘密通訊、宗教信仰、集會結社（以不侵犯他人與社會公益為界限）。</li>
+            <li><strong class="text-slate-800">參政權：</strong>選舉、罷免、創制、複決、應考試服公職。</li>
+          </ul>
+        </div>
+
+        <!-- 卡片 2 (單元一) -->
+        <div id="note-card-2" class="note-card bg-white rounded-3xl p-6 border border-slate-200 shadow-xs space-y-3">
+          <div class="flex items-center gap-2">
+            <span class="w-8 h-8 rounded-lg bg-blue-100 text-blue-700 flex items-center justify-center font-bold text-xs">單元1</span>
+            <h3 class="font-bold text-base text-slate-800">中央政府 vs 地方政府分工</h3>
+          </div>
+          <ul class="text-sm text-slate-600 space-y-2 list-disc list-inside leading-relaxed">
+            <li><strong class="text-slate-800">中央政府：</strong>總統（國家元首）、五院（行政、立法、司法、考試、監察），負責全國一致性法規政策。</li>
+            <li><strong class="text-slate-800">地方政府行政機關：</strong>直轄市/縣市政府、鄉鎮市區公所，執行道路維護、酒駕取締、環境消毒。</li>
+            <li><strong class="text-slate-800">地方政府立法機關：</strong>縣市議會、鄉鎮市民代表會，負責審議地方自治法規並監督首長。</li>
+            <li><strong class="text-slate-800">民意溝通管道：</strong>1999市民專線、公聽會、公共政策網路參與平臺（附議門檻5000人）。</li>
+          </ul>
+        </div>
+
+        <!-- 卡片 3 (單元二) -->
+        <div id="note-card-3" class="note-card bg-white rounded-3xl p-6 border border-slate-200 shadow-xs space-y-3">
+          <div class="flex items-center gap-2">
+            <span class="w-8 h-8 rounded-lg bg-amber-100 text-amber-700 flex items-center justify-center font-bold text-xs">單元2</span>
+            <h3 class="font-bold text-base text-slate-800">社會變遷下的教育、家庭與性平</h3>
+          </div>
+          <ul class="text-sm text-slate-600 space-y-2 list-disc list-inside leading-relaxed">
+            <li><strong class="text-slate-800">教育轉變：</strong>早期重視升學主義、強制髮禁、著制服；現今倡導多元探索、解除髮禁、增設實驗教育。</li>
+            <li><strong class="text-slate-800">家庭型態：</strong>農業社會「子承父業」、「多子多孫」；工商業社會雙薪家庭增多，核心家庭、夫妻家庭、單人家庭比例攀升。</li>
+            <li><strong class="text-slate-800">性別觀念：</strong>打破「男主外、女主內」，推動性別平等教育日（4月20日），男性請領育嬰留職停薪津貼增加。</li>
+          </ul>
+        </div>
+
+        <!-- 卡片 4 (單元二) -->
+        <div id="note-card-4" class="note-card bg-white rounded-3xl p-6 border border-slate-200 shadow-xs space-y-3">
+          <div class="flex items-center gap-2">
+            <span class="w-8 h-8 rounded-lg bg-amber-100 text-amber-700 flex items-center justify-center font-bold text-xs">單元2</span>
+            <h3 class="font-bold text-base text-slate-800">族群文化、多元信仰與建築融合</h3>
+          </div>
+          <ul class="text-sm text-slate-600 space-y-2 list-disc list-inside leading-relaxed">
+            <li><strong class="text-slate-800">信仰交流：</strong>原住民族敬畏祖靈自然；漢人帶來媽祖與王爺（東港迎王）；西方傳入天主教與基督新教；新住民與移工帶來伊斯蘭教（開齋節、不食豬肉）。</li>
+            <li><strong class="text-slate-800">建築融合：</strong>屏東萬金聖母聖殿（西班牙古堡風融合閩南奉旨石牌）；臺南鹽水天主聖神堂（中式宮殿與石獅子）；四四南村（眷村魚骨型建築轉型文化館）。</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- 底部引導挑戰區塊 -->
+      <div class="bg-blue-50 border border-blue-200 rounded-3xl p-6 text-center space-y-3">
+        <h3 class="text-lg font-bold text-blue-900">已經熟讀重點了嗎？馬上下場牛刀小試！</h3>
+        <p class="text-sm text-slate-600">透過填空題直接測試你對專有名詞的熟練度，或直接挑戰選擇題！</p>
+        <div class="flex justify-center gap-3 pt-1">
+          <button onclick="switchTab('fill')" class="bg-blue-600 hover:bg-blue-700 text-white font-bold px-6 py-2.5 rounded-xl text-sm transition shadow-sm">
+            ✍️ 開始填空題挑戰
+          </button>
+          <button onclick="switchTab('quiz')" class="bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 font-bold px-6 py-2.5 rounded-xl text-sm transition">
+            🎯 直接做選擇題
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 模組 2：關鍵字填空挑戰 -->
+    <section id="section-fill" class="hidden space-y-6">
+      <!-- 統計面板 -->
+      <div class="bg-white rounded-2xl p-4 sm:p-5 shadow-xs border border-slate-200 flex flex-wrap items-center justify-between gap-4">
+        <div class="flex items-center gap-3">
+          <div class="text-2xl font-black text-indigo-600" id="fill-progress-text">1 / 8</div>
+          <div>
+            <div class="text-xs font-semibold text-slate-400">目前進度</div>
+            <div class="w-32 sm:w-48 bg-slate-100 rounded-full h-2.5 mt-1 overflow-hidden">
+              <div id="fill-progress-bar" class="bg-indigo-600 h-2.5 rounded-full transition-all duration-300" style="width: 12.5%"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-4">
+          <div class="bg-indigo-50 border border-indigo-200 px-3 py-1.5 rounded-xl flex items-center gap-1.5 text-xs font-bold text-indigo-700">
+            <span>單元：</span>
+            <span id="fill-unit-badge">全部單元</span>
+          </div>
+          <div class="bg-emerald-50 border border-emerald-200 px-3 py-1.5 rounded-xl flex items-center gap-2">
+            <span class="text-emerald-500 font-bold">✨ 正確題數</span>
+            <span id="fill-score-count" class="font-black text-emerald-600 text-lg">0</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 填空卡片 -->
+      <div id="fill-card" class="bg-white rounded-3xl p-6 sm:p-8 shadow-sm border border-slate-200 transition-all">
+        <div class="flex items-center justify-between gap-2 mb-4">
+          <span id="fill-tag" class="px-3 py-1 bg-indigo-50 text-indigo-700 text-xs font-bold rounded-full border border-indigo-100">
+            名詞精準記憶
+          </span>
+          <span class="text-xs text-slate-400">可直接鍵入或點選下方詞庫卡片</span>
+        </div>
+
+        <!-- 填空題目句子 -->
+        <div class="mb-6">
+          <h2 id="fill-sentence" class="text-base sm:text-xl font-bold text-slate-800 leading-relaxed">
+            題目讀取中...
+          </h2>
+        </div>
+
+        <!-- 輸入區 -->
+        <div class="flex flex-col sm:flex-row gap-3 mb-6">
+          <input type="text" id="fill-input" placeholder="請在此輸入關鍵字..." class="flex-1 px-4 py-3 border-2 border-slate-300 rounded-2xl focus:border-indigo-500 focus:outline-hidden text-base sm:text-lg font-bold text-slate-800 placeholder:text-slate-400 transition" autocomplete="off">
+          <button onclick="checkFillAnswer()" id="fill-submit-btn" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold px-8 py-3 rounded-2xl text-base transition shadow-sm active:scale-95 whitespace-nowrap">
+            送出檢查
+          </button>
+        </div>
+
+        <!-- 輔助候選字卡 (方便平板與手機操作) -->
+        <div class="bg-slate-50 border border-slate-200 p-4 rounded-2xl mb-4">
+          <div class="text-xs font-bold text-slate-500 mb-2.5 flex items-center gap-1.5">
+            <span>💡 輔助詞庫（點擊直接填入）：</span>
+          </div>
+          <div id="fill-chips-container" class="flex flex-wrap gap-2">
+            <!-- 由 JS 動態生成 -->
+          </div>
+        </div>
+
+        <!-- 填空結果反饋區 -->
+        <div id="fill-feedback" class="hidden p-4 rounded-2xl border transition-all">
+          <div class="flex items-start gap-3">
+            <div id="fill-feedback-icon" class="text-2xl font-bold mt-0.5"></div>
+            <div class="flex-1">
+              <h3 id="fill-feedback-title" class="font-bold text-base mb-1"></h3>
+              <p id="fill-feedback-desc" class="text-sm text-slate-600 leading-relaxed"></p>
+            </div>
+          </div>
+          <div class="mt-4 flex justify-end">
+            <button onclick="nextFillQuestion()" id="fill-next-btn" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold px-6 py-2 rounded-xl text-sm transition shadow-sm">
+              下一題 ➔
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 填空挑戰完成面板 -->
+      <div id="fill-result-card" class="hidden bg-white rounded-3xl p-8 shadow-sm border border-slate-200 text-center space-y-6">
+        <div class="w-20 h-20 bg-indigo-100 text-indigo-600 rounded-3xl flex items-center justify-center text-4xl mx-auto shadow-inner">
+          🏅
+        </div>
+        <div>
+          <h2 class="text-2xl font-black text-slate-800">本單元填空挑戰成功！</h2>
+          <p class="text-slate-500 text-sm mt-1">你已經精準掌握最重要的專有名詞與核心知識點</p>
+        </div>
+
+        <div class="bg-slate-50 p-4 rounded-2xl border border-slate-100 max-w-xs mx-auto">
+          <div class="text-xs text-slate-400">填空答對題數</div>
+          <div id="fill-final-score" class="text-3xl font-black text-indigo-600 mt-1">0 / 8</div>
+        </div>
+
+        <div class="flex justify-center gap-3 pt-2">
+          <button onclick="restartFill()" class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold px-6 py-2.5 rounded-xl text-sm transition">
+            🔄 重新挑戰填空
+          </button>
+          <button onclick="switchTab('quiz')" class="bg-blue-600 hover:bg-blue-700 text-white font-bold px-6 py-2.5 rounded-xl text-sm transition">
+            🎯 前往選擇題測驗
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 模組 3：闖關測驗 (選擇題) -->
+    <section id="section-quiz" class="hidden space-y-6">
+      <!-- 統計面板 -->
+      <div class="bg-white rounded-2xl p-4 sm:p-5 shadow-xs border border-slate-200 flex flex-wrap items-center justify-between gap-4">
+        <div class="flex items-center gap-3">
+          <div class="text-2xl font-black text-blue-600" id="quiz-progress-text">1 / 10</div>
+          <div>
+            <div class="text-xs font-semibold text-slate-400">目前進度</div>
+            <div class="w-32 sm:w-48 bg-slate-100 rounded-full h-2.5 mt-1 overflow-hidden">
+              <div id="quiz-progress-bar" class="bg-blue-600 h-2.5 rounded-full transition-all duration-300" style="width: 10%"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-3">
+          <div class="bg-blue-50 border border-blue-200 px-3 py-1.5 rounded-xl flex items-center gap-1.5 text-xs font-bold text-blue-700">
+            <span>單元：</span>
+            <span id="quiz-unit-badge">全部單元</span>
+          </div>
+          <div class="bg-amber-50 border border-amber-200 px-3 py-1.5 rounded-xl flex items-center gap-2">
+            <span class="text-amber-500 font-bold">🔥 連擊</span>
+            <span id="streak-count" class="font-black text-amber-600 text-lg">0</span>
+          </div>
+          <div class="bg-emerald-50 border border-emerald-200 px-3 py-1.5 rounded-xl flex items-center gap-2">
+            <span class="text-emerald-500 font-bold">⭐ 得分</span>
+            <span id="score-count" class="font-black text-emerald-600 text-lg">0</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 題目卡片 -->
+      <div id="quiz-card" class="bg-white rounded-3xl p-6 sm:p-8 shadow-sm border border-slate-200 transition-all">
+        <!-- 標籤與提示 -->
+        <div class="flex items-center justify-between gap-2 mb-4">
+          <span id="quiz-tag" class="px-3 py-1 bg-blue-50 text-blue-700 text-xs font-bold rounded-full border border-blue-100">
+            戰後民主歷程
+          </span>
+          <button onclick="toggleHint()" id="hint-toggle-btn" class="text-xs text-amber-600 hover:text-amber-700 font-semibold flex items-center gap-1 bg-amber-50 hover:bg-amber-100 px-2.5 py-1 rounded-lg transition border border-amber-200">
+            💡 觀念提示
+          </button>
+        </div>
+
+        <!-- 提示內容區塊 -->
+        <div id="hint-box" class="hidden mb-4 p-3 bg-amber-50/70 border-l-4 border-amber-400 rounded-r-lg text-xs sm:text-sm text-amber-900 leading-relaxed">
+          提示文字載入中...
+        </div>
+
+        <!-- 問題文字 -->
+        <h2 id="quiz-question" class="text-lg sm:text-xl font-bold text-slate-800 leading-relaxed mb-6">
+          題目加載中...
+        </h2>
+
+        <!-- 選項列表 -->
+        <div id="quiz-options" class="grid grid-cols-1 gap-3">
+          <!-- 選項由 JS 動態生成 -->
+        </div>
+
+        <!-- 解釋說明反饋區 -->
+        <div id="quiz-feedback" class="hidden mt-6 p-4 rounded-2xl border transition-all">
+          <div class="flex items-start gap-3">
+            <div id="feedback-icon" class="text-2xl font-bold mt-0.5"></div>
+            <div class="flex-1">
+              <h3 id="feedback-title" class="font-bold text-base mb-1"></h3>
+              <p id="feedback-desc" class="text-sm text-slate-600 leading-relaxed"></p>
+            </div>
+          </div>
+          <div class="mt-4 flex justify-end">
+            <button onclick="nextQuestion()" id="next-btn" class="bg-blue-600 hover:bg-blue-700 text-white font-bold px-6 py-2 rounded-xl text-sm transition shadow-sm">
+              下一題 ➔
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 測驗完成結果面板 -->
+      <div id="quiz-result-card" class="hidden bg-white rounded-3xl p-8 shadow-sm border border-slate-200 text-center space-y-6">
+        <div class="w-20 h-20 bg-amber-100 text-amber-600 rounded-3xl flex items-center justify-center text-4xl mx-auto shadow-inner">
+          🏆
+        </div>
+        <div>
+          <h2 class="text-2xl font-black text-slate-800">複習闖關完成！</h2>
+          <p class="text-slate-500 text-sm mt-1">恭喜你完成了所選單元的所有核心試題</p>
+        </div>
+
+        <div class="grid grid-cols-3 gap-3 max-w-md mx-auto">
+          <div class="bg-slate-50 p-3 rounded-2xl border border-slate-100">
+            <div class="text-xs text-slate-400">總得分</div>
+            <div id="result-score" class="text-2xl font-black text-blue-600 mt-1">0</div>
+          </div>
+          <div class="bg-slate-50 p-3 rounded-2xl border border-slate-100">
+            <div class="text-xs text-slate-400">正確率</div>
+            <div id="result-rate" class="text-2xl font-black text-emerald-600 mt-1">0%</div>
+          </div>
+          <div class="bg-slate-50 p-3 rounded-2xl border border-slate-100">
+            <div class="text-xs text-slate-400">最高連擊</div>
+            <div id="result-streak" class="text-2xl font-black text-amber-500 mt-1">0</div>
+          </div>
+        </div>
+
+        <div class="flex justify-center gap-3 pt-2">
+          <button onclick="restartQuiz()" class="bg-blue-600 hover:bg-blue-700 text-white font-bold px-6 py-2.5 rounded-xl text-sm transition">
+            🔄 重新挑戰一次
+          </button>
+          <button onclick="switchTab('notes')" class="bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold px-6 py-2.5 rounded-xl text-sm transition">
+            📖 閱讀考前筆記
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 模組 4：歷史時序排排看 (第一單元專屬) -->
+    <section id="section-timeline" class="hidden space-y-6">
+      <div class="bg-white rounded-3xl p-6 sm:p-8 shadow-sm border border-slate-200">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-6">
+          <div>
+            <div class="inline-block px-2.5 py-1 bg-blue-50 text-blue-700 text-xs font-bold rounded-lg border border-blue-100 mb-2">
+              📘 第一單元重點特訓
+            </div>
+            <h2 class="text-lg sm:text-xl font-bold text-slate-800">戰後臺灣民主大事記：時序排排看</h2>
+            <p class="text-xs sm:text-sm text-slate-500 mt-1">請利用「上移」與「下移」按鈕，將下列歷史事件依照【發生的先後順序】重新排列！</p>
+          </div>
+          <button onclick="checkTimelineOrder()" class="bg-blue-600 hover:bg-blue-700 text-white font-bold px-5 py-2.5 rounded-xl text-sm transition whitespace-nowrap shadow-sm">
+            驗證排序結果
+          </button>
+        </div>
+
+        <!-- 排序項目容器 -->
+        <div id="timeline-list" class="space-y-3">
+          <!-- 由 JS 渲染動態事件卡片 -->
+        </div>
+
+        <div id="timeline-result" class="hidden mt-6 p-4 rounded-2xl text-sm font-semibold"></div>
+      </div>
+    </section>
+
+    <!-- 模組 5：權利與義務二選一分類 (第一單元專屬) -->
+    <section id="section-classify" class="hidden space-y-6">
+      <div class="bg-white rounded-3xl p-6 sm:p-8 shadow-sm border border-slate-200 text-center max-w-xl mx-auto">
+        <div class="inline-block px-3 py-1 bg-blue-50 text-blue-700 text-xs font-bold rounded-full mb-3 border border-blue-100">
+          📘 第一單元憲法實踐特訓
+        </div>
+        <h2 class="text-xl font-bold text-slate-800 mb-2">憲法平衡木：是「權利」還是「義務」？</h2>
+        <p class="text-sm text-slate-500 mb-6">辨認下列國民生活情境，選出它是屬於憲法保障的權利，還是國民應盡的義務！</p>
+
+        <!-- 卡片展示區 -->
+        <div id="classify-card" class="bg-gradient-to-br from-blue-50 to-indigo-50 border-2 border-indigo-200 rounded-3xl p-8 mb-6 min-h-[140px] flex items-center justify-center shadow-xs">
+          <p id="classify-text" class="text-lg sm:text-xl font-bold text-slate-800 leading-snug">
+            情境載入中...
+          </p>
+        </div>
+
+        <!-- 選擇按鈕 -->
+        <div class="grid grid-cols-2 gap-4">
+          <button onclick="handleClassify('權利')" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 px-4 rounded-2xl text-base transition shadow-sm active:scale-95 flex items-center justify-center gap-2">
+            <span>🛡️ 憲法保障的「權利」</span>
+          </button>
+          <button onclick="handleClassify('義務')" class="bg-amber-600 hover:bg-amber-700 text-white font-bold py-3 px-4 rounded-2xl text-base transition shadow-sm active:scale-95 flex items-center justify-center gap-2">
+            <span>🤝 國民應盡的「義務」</span>
+          </button>
+        </div>
+
+        <!-- 分類回饋 -->
+        <div id="classify-feedback" class="mt-4 text-sm font-semibold min-h-[24px]"></div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- 部署到 GitHub 指南彈跳視窗 (Modal) -->
+  <div id="deploy-modal" class="hidden fixed inset-0 z-50 bg-black/50 backdrop-blur-xs flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl space-y-5 animate-scaleUp">
+      <div class="flex justify-between items-start">
+        <div class="flex items-center gap-2">
+          <span class="w-8 h-8 rounded-xl bg-slate-900 text-white flex items-center justify-center text-sm font-bold">
+            GH
+          </span>
+          <h3 class="text-lg font-bold text-slate-800">如何發布到 GitHub Pages？</h3>
+        </div>
+        <button onclick="closeDeployModal()" class="text-slate-400 hover:text-slate-600 p-1">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+        </button>
+      </div>
+
+      <div class="text-sm text-slate-600 space-y-3">
+        <p class="leading-relaxed">只要簡單 4 個步驟，就能將此單一 HTML 檔案變為全班都能連線的線上複習網站：</p>
+        <ol class="list-decimal list-inside space-y-2 font-medium bg-slate-50 p-4 rounded-2xl border border-slate-100">
+          <li>在 GitHub 上新建一個公開儲存庫（Repository），例如：<code class="text-blue-600 bg-blue-50 px-1 py-0.5 rounded">grade6-social-quiz</code>。</li>
+          <li>將本檔案下載並命名為 <strong class="text-slate-900">index.html</strong>，上傳（Commit）到倉庫的根目錄。</li>
+          <li>進入倉庫的 <strong>Settings（設定）</strong> ➜ 點選左側選單的 <strong>Pages</strong>。</li>
+          <li>在 <em>Build and deployment</em> 下方，Branch 選擇 <strong class="text-slate-900">main</strong>，資料夾選 <strong class="text-slate-900">/ (root)</strong> 並儲存。</li>
+        </ol>
+        <p class="text-xs text-slate-500">等待約 1~2 分鐘，你的專屬網址就會出現在該頁面，可直接傳給學生或投影使用！</p>
+      </div>
+
+      <div class="flex justify-end pt-2">
+        <button onclick="closeDeployModal()" class="bg-blue-600 hover:bg-blue-700 text-white text-sm font-bold px-5 py-2.5 rounded-xl transition">
+          我知道了！
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <footer class="mt-auto py-6 text-center text-xs text-slate-400 border-t border-slate-200 bg-white">
+    國小六年級社會科上學期 · 第一、二單元教學互動複習資源 · 支援電腦、平板與手機自適應顯示
+  </footer>
+
+  <!-- 應用程式核心邏輯 JavaScript -->
+  <script>
+    // --- 當前篩選單元狀態：'all' | 1 | 2 ---
+    let currentUnitFilter = 'all';
+
+    // --- 填空題資料庫 (標註 unit: 1 或 2) ---
+    const rawFillQuestions = [
+      {
+        unit: 1,
+        tag: "第一單元 · 戰後重大事件",
+        sentence: "民國36年，政府人員在臺北查緝私菸處理不當，造成民眾傷亡與抗議，隨後引發全臺大規模衝突的事件稱為【_______】。",
+        answer: "二二八事件",
+        aliases: ["228事件", "二二八"],
+        chips: ["二二八事件", "戒嚴令", "美麗島事件", "動員戡亂"],
+        desc: "民國36年（1947年）爆發的二二八事件，隨後政府以武力鎮壓，使許多民眾與社會菁英受難，對臺灣政治發展產生深遠影響。"
+      },
+      {
+        unit: 1,
+        tag: "第一單元 · 戒嚴與解嚴",
+        sentence: "民國38年政府宣布實施戒嚴，限制集會言論自由；直到民國76年，政府正式宣布【_______】，才開啟政治民主化新頁。",
+        answer: "解除戒嚴",
+        aliases: ["解嚴"],
+        chips: ["解除戒嚴", "總統直選", "公民投票", "制定憲法"],
+        desc: "民國76年（1987年）政府宣布解除長達38年的戒嚴令，新的政黨、報社及電視臺紛紛成立，政治邁向多元開放。"
+      },
+      {
+        unit: 1,
+        tag: "第一單元 · 民主政治里程碑",
+        sentence: "民國85年，我國第一次實施由全體人民直接選舉【_______】和副總統，為臺灣的民主體制樹立重大里程碑。",
+        answer: "總統",
+        aliases: ["中華民國總統"],
+        chips: ["行政院長", "總統", "立法委員", "縣市長"],
+        desc: "民國85年（1996年）由公民直接投票選出第九任總統李登輝與副總統連戰，落實了憲法中「主權在民」的精神。"
+      },
+      {
+        unit: 1,
+        tag: "第一單元 · 憲法三大義務",
+        sentence: "中華民國憲法規定人民應盡的三大義務包括：納稅、服兵役，以及六歲至十五歲國民必須接受的【_______】。",
+        answer: "受國民教育",
+        aliases: ["國民教育", "接受國民教育", "義務教育"],
+        chips: ["受國民教育", "終身學習", "高等教育", "補習教育"],
+        desc: "受國民教育是憲法明定的權利，也是國民應盡的義務，讓每個人都能增長知識、健全發展並提升國家競爭力。"
+      },
+      {
+        unit: 1,
+        tag: "第一單元 · 公民參與平臺",
+        sentence: "政府於民國104年設置「公共政策網路參與平臺」，若民眾提議在60天內獲得超過【_______】人附議，政府就必須正式回應。",
+        answer: "5000",
+        aliases: ["5,000", "五千"],
+        chips: ["1000", "3000", "5000", "10000"],
+        desc: "公共政策網路參與平臺提供全民參與公共事務的管道，門檻為60天內獲5000人以上附議，主管機關須正式說明與研議。"
+      },
+      {
+        unit: 1,
+        tag: "第一單元 · 政府分工運作",
+        sentence: "在中央與地方政府的合作中，立法院負責制定交通法規，而第一線加強取締酒後駕車的則是屬於地方【_______】機關（如縣市政府警察局）。",
+        answer: "行政",
+        aliases: ["地方行政", "行政機關"],
+        chips: ["行政", "立法", "司法", "考試"],
+        desc: "縣市政府警察局為地方行政機關，負責執行法規並在第一線執法；地方立法機關（議會）則負責監督行政施政。"
+      },
+      {
+        unit: 2,
+        tag: "第二單元 · 教育觀念變遷",
+        sentence: "早期學校教育重視整齊畫一，對學生服裝與頭髮設有嚴格的【_______】；現代教育則已廢除此規定，尊重學生的自主管理與多元審美。",
+        answer: "髮禁",
+        aliases: ["學生髮禁"],
+        chips: ["便服日", "髮禁", "體育課", "家政課"],
+        desc: "教育部已明定學校不得限制學生髮式，現代學校尊重學生的身體自主權與個人風格探索。"
+      },
+      {
+        unit: 2,
+        tag: "第二單元 · 宗教建築融合",
+        sentence: "位於屏東縣萬巒鄉的【_______】，建築融合了西班牙古堡風格以及閩南花崗岩「奉旨」石牌、對聯設計，展現中西文化交流。",
+        answer: "萬金天主教堂",
+        aliases: ["萬金聖母聖殿", "萬金教堂"],
+        chips: ["萬金天主教堂", "鹿港龍山寺", "臺南孔廟", "四四南村"],
+        desc: "清帝國時期郭德剛神父建立的萬金天主教堂，融入閩南建築特色以拉近與居民的距離，見證了文化融合的歷史。"
+      },
+      {
+        unit: 2,
+        tag: "第二單元 · 多元文化節慶",
+        sentence: "信奉伊斯蘭教的教徒在經過一個月的齋戒月後，會舉辦盛大的【_______】慶祝活動，與親友團聚並分享美食。",
+        answer: "開齋節",
+        aliases: ["肉孜節"],
+        chips: ["開齋節", "潑水節", "聖貝祭", "點燈節"],
+        desc: "開齋節是伊斯蘭教的重要節慶，各縣市政府也常舉辦慶祝活動，促進臺灣民眾與新住民、國際移工彼此理解與尊重。"
+      },
+      {
+        unit: 2,
+        tag: "第二單元 · 家庭型態轉變",
+        sentence: "隨著現代工商業社會生活形態改變，家庭成員僅有夫妻兩人共同生活的【_______】比率近年來顯著提高。",
+        answer: "夫妻家庭",
+        aliases: ["夫妻"],
+        chips: ["大家庭", "夫妻家庭", "三代同堂", "隔代教養"],
+        desc: "現代社會少子化與生活觀念改變，單人家庭與夫妻家庭（僅夫妻居住）的比率皆逐漸攀升。"
+      },
+      {
+        unit: 2,
+        tag: "第二單元 · 性別平等倡導",
+        sentence: "教育部將每年4月20日訂為【_______】日，期盼透過法律落實，讓學生從小建立平權觀念，營造友善校園。",
+        answer: "性別平等教育",
+        aliases: ["性別平等教育日", "性別平等"],
+        chips: ["世界人權", "性別平等教育", "兒童人權", "多元文化"],
+        desc: "4月20日為性別平等教育日，旨在宣導消除性別刻板印象與歧視，促進實質平等與相互尊重。"
+      },
+      {
+        unit: 2,
+        tag: "第二單元 · 聚落保存歷史",
+        sentence: "戰後政府在臺北市興建的【_______】，安置了聯勤兵工廠軍民眷屬，經居民爭取保存部分建築並轉型為眷村文物館。",
+        answer: "四四南村",
+        aliases: ["信義公民會館", "44南村"],
+        chips: ["五溝水聚落", "新化老街", "四四南村", "檜意森活村"],
+        desc: "四四南村為典型眷村聚落建築，保留魚骨狀排列的連棟平房，保存不同省籍文化交融的歷史記憶。"
+      }
+    ];
+
+    // --- 題目資料庫 (選擇題，標註 unit: 1 或 2) ---
+    const rawQuizData = [
+      {
+        unit: 1,
+        question: "回顧戰後臺灣走向民主的歷程，下列哪一個歷史事件發生的時間最晚，是臺灣落實「主權在民」的重要里程碑？",
+        tag: "第一單元 · 戰後民主歷程",
+        hint: "請回想『人民直接投下選票決定國家元首』是在民國幾年發生的。",
+        options: [
+          { text: "政府宣布解除戒嚴令", isCorrect: false, rationale: "解嚴是在民國76年（1987年），但直選總統的時間比解嚴更晚。" },
+          { text: "實施首次總統副總統人民直選", isCorrect: true, rationale: "民國85年（1996年）中華民國第一次由人民直接選舉總統與副總統，是民主化發展最晚且極具代表性的里程碑。" },
+          { text: "爆發全臺震驚的二二八事件", isCorrect: false, rationale: "二二八事件發生於民國36年（1947年），是戰後初期最早爆發的重大衝突。" },
+          { text: "美麗島雜誌社舉辦人權遊行", isCorrect: false, rationale: "美麗島事件發生於民國68年（1979年），早於解嚴與總統直選。" }
+        ]
+      },
+      {
+        unit: 1,
+        question: "在長達三十八年的戒嚴時期，政府以維護國家安全為由實施管制。下列何者是當時人民受到最嚴格限制的權利？",
+        tag: "第一單元 · 憲法與自由權",
+        hint: "戒嚴時期實施了『黨禁』與『報禁』，民眾不能任意遊行或創辦新報社。",
+        options: [
+          { text: "接受九年國民教育的權利", isCorrect: false, rationale: "民國57年政府將國民教育延長為九年，受教育並非戒嚴時被限制的項目。" },
+          { text: "前往公立醫院就醫看診的權利", isCorrect: false, rationale: "基本醫療權利並未受到戒嚴法令的限制或剝奪。" },
+          { text: "自由組織政黨與集會遊行的自由", isCorrect: true, rationale: "戒嚴時期政府頒布許多禁令，嚴格限制人民的言論、集會、出版與結社自由，甚至實施黨禁與報禁。" },
+          { text: "選擇從事農業或工商業的權利", isCorrect: false, rationale: "人民依然可以依照自身意願投入農業或工商業經營。" }
+        ]
+      },
+      {
+        unit: 1,
+        question: "中華民國憲法保障人民的基本權利，同時規定應盡的三大義務。下列何者屬於人民依照憲法應盡的義務？",
+        tag: "第一單元 · 憲法權利與義務",
+        hint: "這是為了讓政府有足夠經費推動各項公共設施（如公園、道路）與社會福利。",
+        options: [
+          { text: "年滿二十歲參與縣市長投票", isCorrect: false, rationale: "投票選舉屬於憲法保障的『參政權』，是權利而非強制的義務。" },
+          { text: "依據法律規定按時繳納稅金", isCorrect: true, rationale: "憲法規定國民有『納稅』的義務，稅收是政府推動公共建設、教育醫療與社會福利的財政來源。" },
+          { text: "自由選擇喜愛的宗教信仰", isCorrect: false, rationale: "信仰宗教屬於憲法第十三條保障的『自由權』。" },
+          { text: "在公共政策平臺上提案建議", isCorrect: false, rationale: "對政策表達意見屬於言論與公民參與的權利，並非國民義務。" }
+        ]
+      },
+      {
+        unit: 1,
+        question: "民主國家的中央與地方政府各司其職。若某縣市發生嚴重的酒後駕車問題，下列哪一個機關主要負責在第一線進行攔檢與取締？",
+        tag: "第一單元 · 政府組織分工",
+        hint: "想一想站在馬路上值勤、執法並開立罰單的人員屬於哪一個地方行政機關。",
+        options: [
+          { text: "立法院的立法委員", isCorrect: false, rationale: "立法院是最高中央立法機關，職責是修改或制定酒駕加重刑罰的法律，並非第一線執法。" },
+          { text: "縣市政府所屬的警察局", isCorrect: true, rationale: "縣市政府警察局屬於『地方行政機關』，負責落實法規、第一線執行酒測攔檢與取締工作。" },
+          { text: "司法院所屬的最高法院", isCorrect: false, rationale: "司法院與各級法院負責案件的審判，不負責路口交通巡邏。" },
+          { text: "地方直轄市與縣市議會", isCorrect: false, rationale: "縣市議會是『地方立法機關』，主要功能是質詢首長、監督行政機關與審議法規。" }
+        ]
+      },
+      {
+        unit: 1,
+        question: "民主政府需要傾聽民意。當民眾對中央施政有建設性的想法，希望能號召群眾共同督促政府時，下列哪一種管道最合適？",
+        tag: "第一單元 · 公民參與平臺",
+        hint: "政府於民國104年設置了這個單一網路窗口，只要60天內附議滿5,000人，政府就必須正式回應。",
+        options: [
+          { text: "撥打市民專線1999反映", isCorrect: false, rationale: "1999多為各縣市地方政府處理在地日常市政問題的即時電話專線。" },
+          { text: "前往公共政策網路參與平臺附議", isCorrect: true, rationale: "『公共政策網路參與平臺』是中央政府設置的數位管道，民眾可提出建議，達法定連署門檻後主管機關必須公開具體回覆。" },
+          { text: "私下向朋友抱怨施政成果", isCorrect: false, rationale: "私下抱怨無法將具體建議傳達給相關公務體系或引起政府正式討論。" },
+          { text: "直接向法院提起行政訴訟", isCorrect: false, rationale: "訴訟是權益遭受違法行政處分侵害時的救濟手段，並非日常提出公共政策建議的平臺。" }
+        ]
+      },
+      {
+        unit: 2,
+        question: "比較早期與現代臺灣的學校教育，下列哪一項敘述最能體現「現代教育鼓勵個人多元發展」的特色？",
+        tag: "第二單元 · 教育觀念演變",
+        hint: "以前的學生必須剪統一長度的平頭或西瓜皮，現在則更加尊重學生的身體自主權。",
+        options: [
+          { text: "學校嚴格執行男女學生的髮禁規定", isCorrect: false, rationale: "嚴格髮禁是戒嚴與早期學校強調統一管理的規定，現已廢除以維護人格自主。" },
+          { text: "僅注重考試成績作為唯一定位依據", isCorrect: false, rationale: "重視聯考與死背是早期升學競爭時期的特點，現代強調適性揚才。" },
+          { text: "提供多元社團與自主實驗教育管道", isCorrect: true, rationale: "現代教育打破過去制式框架，鼓勵學生探索興趣、成立多樣社團，甚至能選擇個人或機構實驗教育。" },
+          { text: "規定全體男女學生必須學習相同工藝", isCorrect: false, rationale: "早期常有男生上工藝、女生讀家政的性別劃分，現今已打破框架。" }
+        ]
+      },
+      {
+        unit: 2,
+        question: "隨著臺灣由傳統農業社會邁入現代工商業社會，臺灣家庭的結構型態出現了什麼顯著變化？",
+        tag: "第二單元 · 家庭型態變遷",
+        hint: "農業社會需要大量人力耕作，但工商業社會生活步調改變，只有夫妻兩人或個人的戶數比例增加。",
+        options: [
+          { text: "大家庭與三代同堂的比例大幅增加", isCorrect: false, rationale: "大家庭與多代共居的比例受到都市化與少子化影響正逐年減少。" },
+          { text: "單人家庭與夫妻家庭的比例漸漸提高", isCorrect: true, rationale: "在少子化、高齡化與追求生活自主的影響下，單人家庭與僅有夫妻同住的家庭比例明顯攀升。" },
+          { text: "社會普遍嚴格要求子女遵守子承父業", isCorrect: false, rationale: "現代家長多能支持孩子探索個人興趣，而非強行要求繼承家業。" },
+          { text: "每一戶家庭皆生養四位以上的子女", isCorrect: false, rationale: "臺灣現今處於少子化趨勢，家庭平均子女數大幅下降。" }
+        ]
+      },
+      {
+        unit: 2,
+        question: "傳統觀念常有「男主外、女主內」的性別刻板印象。為了邁向性別平等社會，現代生活出現了哪種新轉變？",
+        tag: "第二單元 · 性別平權推展",
+        hint: "不論是家務分配或是職場專業，都不再以生理性別作為唯一劃分。",
+        options: [
+          { text: "認定保母或托育工作必須全由女性擔任", isCorrect: false, rationale: "現已推廣『托育人員』專業證照，具備專業能力的男性同樣能勝任托育工作。" },
+          { text: "夫妻共同協調家務且男性育嬰留停比率提升", isCorrect: true, rationale: "雙薪家庭普及後，家務成為共同責任，政府亦修法保障並提升男性申請育嬰留職停薪津貼的比例。" },
+          { text: "規定只有母親才能請假照顧生病的孩子", isCorrect: false, rationale: "性別平等工作法保障不分性別的父母皆可享有家庭照顧假與育嬰假。" },
+          { text: "限制女性擔任公職與民意代表的機會", isCorrect: false, rationale: "現代女性參政比率屢創新高，憲法更保障平等的參政權。" }
+        ]
+      },
+      {
+        unit: 2,
+        question: "臺灣是個宗教信仰多元包容的社會。下列哪一個宗教以《古蘭經》為經典，教徒每天向聖地麥加祈禱，且遵守不食豬肉的戒律？",
+        tag: "第二單元 · 多元宗教文化",
+        hint: "臺灣每年都會在大安森林公園等場地為移工與新住民盛大舉辦『開齋節』慶祝活動。",
+        options: [
+          { text: "佛教", isCorrect: false, rationale: "佛教奉釋迦牟尼佛為祖，提倡眾生平等與慈悲，經典並非《古蘭經》。" },
+          { text: "伊斯蘭教", isCorrect: true, rationale: "伊斯蘭教信奉唯一真神阿拉，教徒稱為穆斯林，以《古蘭經》為依歸，遵守禁酒、不吃豬肉並慶祝開齋節。" },
+          { text: "道教", isCorrect: false, rationale: "道教奉老子為道祖，重視順應自然，是臺灣傳統民間信仰的重要根基。" },
+          { text: "基督新教", isCorrect: false, rationale: "基督教信奉耶穌為救世主，以《聖經》為核心經典。" }
+        ]
+      },
+      {
+        unit: 2,
+        question: "屏東縣萬金天主教堂與臺南鹽水天主聖神堂在建築上有一個共通的特殊之處，這反映了臺灣歷史上的什麼現象？",
+        tag: "第二單元 · 聚落與建築融合",
+        hint: "外國神父為了拉近與當地居民的距離，在教堂外設立了石獅子、對聯與花崗岩石牌。",
+        options: [
+          { text: "西方宗教與本土文化互相包容與融合", isCorrect: true, rationale: "萬金天教堂的『奉旨』花崗岩石牌與鹽水天主堂的中國宮殿彩繪、石獅子，都是傳教士融合本土文化的交流成果。" },
+          { text: "當時政府強制規定外國人不得傳教", isCorrect: false, rationale: "這些建築特色是傳教士為了傳教主動在地化的體現，並非受到官方禁令強迫。" },
+          { text: "建築材料短缺只能拆卸廟宇建材建造", isCorrect: false, rationale: "融合設計是為了拉近與臺灣民間的心理距離，而非單純建材匱乏。" },
+          { text: "日治時期官方推動皇民化運動的產物", isCorrect: false, rationale: "皇民化運動以推崇日本神社與日本文化為主，與天主教堂的中西合璧無關。" }
+        ]
+      }
+    ];
+
+    // 動態過濾後的題目清單
+    let fillQuestions = [...rawFillQuestions];
+    let quizData = [...rawQuizData];
+
+    // --- 設定單元切換過濾 ---
+    function setUnitFilter(unit) {
+      soundClick();
+      currentUnitFilter = unit;
+
+      // 更新按鈕外觀樣式
+      const btnAll = document.getElementById('unit-btn-all');
+      const btn1 = document.getElementById('unit-btn-1');
+      const btn2 = document.getElementById('unit-btn-2');
+      const badge = document.getElementById('current-unit-badge');
+      const fillBadge = document.getElementById('fill-unit-badge');
+      const quizBadge = document.getElementById('quiz-unit-badge');
+
+      [btnAll, btn1, btn2].forEach(b => {
+        b.className = 'unit-btn px-3 py-1.5 rounded-xl text-xs sm:text-sm font-semibold bg-white text-slate-600 hover:bg-slate-50 border border-slate-200 transition';
+      });
+
+      if (unit === 'all') {
+        btnAll.className = 'unit-btn px-3 py-1.5 rounded-xl text-xs sm:text-sm font-bold bg-blue-600 text-white shadow-xs transition';
+        badge.innerText = '全部範圍 (1+2)';
+        badge.className = 'px-2 py-0.5 rounded-md bg-blue-100 text-blue-800 text-[11px] font-bold';
+        if (fillBadge) fillBadge.innerText = '全部單元';
+        if (quizBadge) quizBadge.innerText = '全部單元';
+      } else if (unit === 1) {
+        btn1.className = 'unit-btn px-3 py-1.5 rounded-xl text-xs sm:text-sm font-bold bg-blue-600 text-white shadow-xs transition';
+        badge.innerText = '第一單元：民主與憲法';
+        badge.className = 'px-2 py-0.5 rounded-md bg-blue-100 text-blue-800 text-[11px] font-bold';
+        if (fillBadge) fillBadge.innerText = '第一單元';
+        if (quizBadge) quizBadge.innerText = '第一單元';
+      } else if (unit === 2) {
+        btn2.className = 'unit-btn px-3 py-1.5 rounded-xl text-xs sm:text-sm font-bold bg-amber-600 text-white shadow-xs transition';
+        badge.innerText = '第二單元：變遷與族群';
+        badge.className = 'px-2 py-0.5 rounded-md bg-amber-100 text-amber-800 text-[11px] font-bold';
+        if (fillBadge) fillBadge.innerText = '第二單元';
+        if (quizBadge) quizBadge.innerText = '第二單元';
+      }
+
+      // 控制重點筆記卡片的顯示
+      const u1Banner = document.getElementById('note-unit1-banner');
+      const u2Banner = document.getElementById('note-unit2-banner');
+      const card1 = document.getElementById('note-card-1');
+      const card2 = document.getElementById('note-card-2');
+      const card3 = document.getElementById('note-card-3');
+      const card4 = document.getElementById('note-card-4');
+
+      if (unit === 1) {
+        if (u1Banner) u1Banner.classList.remove('hidden');
+        if (u2Banner) u2Banner.classList.add('hidden');
+        if (card1) card1.classList.remove('hidden');
+        if (card2) card2.classList.remove('hidden');
+        if (card3) card3.classList.add('hidden');
+        if (card4) card4.classList.add('hidden');
+      } else if (unit === 2) {
+        if (u1Banner) u1Banner.classList.add('hidden');
+        if (u2Banner) u2Banner.classList.remove('hidden');
+        if (card1) card1.classList.add('hidden');
+        if (card2) card2.classList.add('hidden');
+        if (card3) card3.classList.remove('hidden');
+        if (card4) card4.classList.remove('hidden');
+      } else {
+        if (u1Banner) u1Banner.classList.remove('hidden');
+        if (u2Banner) u2Banner.classList.remove('hidden');
+        if (card1) card1.classList.remove('hidden');
+        if (card2) card2.classList.remove('hidden');
+        if (card3) card3.classList.remove('hidden');
+        if (card4) card4.classList.remove('hidden');
+      }
+
+      // 重新過濾題目資料庫
+      if (unit === 'all') {
+        fillQuestions = [...rawFillQuestions];
+        quizData = [...rawQuizData];
+      } else {
+        fillQuestions = rawFillQuestions.filter(q => q.unit === unit);
+        quizData = rawQuizData.filter(q => q.unit === unit);
+      }
+
+      // 重置並重新渲染填空題與選擇題
+      restartFill();
+      restartQuiz();
+    }
+
+    // --- 歷史時序排排看資料 ---
+    let timelineEvents = [
+      { id: 4, text: "民國76年：政府宣布解除長達38年的戒嚴令", year: 76 },
+      { id: 1, text: "民國34年：第二次世界大戰結束，中華民國接收臺灣與澎湖", year: 34 },
+      { id: 5, text: "民國85年：我國第一次實施由人民直接選舉總統與副總統", year: 85 },
+      { id: 3, text: "民國68年：美麗島雜誌社在高雄舉辦世界人權日遊行引發衝突", year: 68 },
+      { id: 2, text: "民國36年：因政府查緝私菸處理不當，爆發全臺二二八事件", year: 36 }
+    ];
+
+    // --- 權利與義務二選一資料 ---
+    const classifyItems = [
+      { text: "六歲至十五歲的學齡國民，按時到國小、國中就讀學習", type: "義務", note: "受國民教育既是憲法保障的權利，更是國民及家長必須履行的義務。" },
+      { text: "在個人社交平臺上，客觀發表對於交通新規定的看法", type: "權利", note: "發表意見屬於憲法第十一條保障的言論自由權利。" },
+      { text: "商店經營每月營業額達到法定標準時，開立統一發票繳納營業稅", type: "義務", note: "依法納稅是維持政府運作與公共設施的國民義務。" },
+      { text: "身心障礙考生申請大考時由專人代翻試卷或放大字體考卷", type: "權利", note: "此為憲法保障的平等權，透過合理差別待遇達到真正的實質平等。" },
+      { text: "年滿十八歲且體格檢查合格的男性國民，依法接受軍事訓練", type: "義務", note: "服兵役是憲法第二十條規定的保衛國家安全義務。" },
+      { text: "在選舉日前往投開票所，投票給自己認同的縣市長候選人", type: "權利", note: "投票投票是公民參與公共事務的參政權。" }
+    ];
+
+    // --- 音效系統 (純 Web Audio API 合成，零外部依賴) ---
+    let audioCtx = null;
+    let soundEnabled = true;
+
+    function initAudio() {
+      if (!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      }
+    }
+
+    function toggleSound() {
+      soundEnabled = !soundEnabled;
+      document.getElementById('soundOnIcon').classList.toggle('hidden', !soundEnabled);
+      document.getElementById('soundOffIcon').classList.toggle('hidden', soundEnabled);
+    }
+
+    function playTone(freq, type, duration) {
+      if (!soundEnabled) return;
+      try {
+        initAudio();
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = type;
+        osc.frequency.value = freq;
+        gain.gain.setValueAtTime(0.15, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + duration);
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start();
+        osc.stop(audioCtx.currentTime + duration);
+      } catch (e) {
+        console.error(e);
+      }
+    }
+
+    function soundCorrect() {
+      playTone(523.25, 'sine', 0.15); // C5
+      setTimeout(() => playTone(659.25, 'sine', 0.15), 100); // E5
+      setTimeout(() => playTone(783.99, 'sine', 0.3), 200); // G5
+    }
+
+    function soundWrong() {
+      playTone(261.63, 'sawtooth', 0.18); // C4
+      setTimeout(() => playTone(220.00, 'sawtooth', 0.25), 150); // A3
+    }
+
+    function soundClick() {
+      playTone(440, 'triangle', 0.05);
+    }
+
+    // --- 填空題邏輯 ---
+    let currentFillIndex = 0;
+    let fillScore = 0;
+    let answeredCurrentFill = false;
+
+    function renderFillQuestion() {
+      answeredCurrentFill = false;
+      const f = fillQuestions[currentFillIndex];
+      document.getElementById('fill-progress-text').innerText = `${currentFillIndex + 1} / ${fillQuestions.length}`;
+      document.getElementById('fill-progress-bar').style.width = `${((currentFillIndex + 1) / fillQuestions.length) * 100}%`;
+      document.getElementById('fill-tag').innerText = f.tag;
+      document.getElementById('fill-sentence').innerText = f.sentence;
+
+      const input = document.getElementById('fill-input');
+      input.value = '';
+      input.disabled = false;
+      input.focus();
+
+      document.getElementById('fill-submit-btn').disabled = false;
+      document.getElementById('fill-feedback').classList.add('hidden');
+
+      // 渲染輔助字卡
+      const chipsBox = document.getElementById('fill-chips-container');
+      chipsBox.innerHTML = '';
+      f.chips.forEach(chip => {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'px-3 py-1.5 rounded-xl bg-white border border-slate-300 hover:border-indigo-400 hover:bg-indigo-50 text-slate-700 text-xs sm:text-sm font-semibold transition active:scale-95';
+        btn.innerText = chip;
+        btn.onclick = () => {
+          if (!answeredCurrentFill) {
+            soundClick();
+            input.value = chip;
+          }
+        };
+        chipsBox.appendChild(btn);
+      });
+    }
+
+    function checkFillAnswer() {
+      if (answeredCurrentFill) return;
+      const input = document.getElementById('fill-input');
+      const userVal = input.value.trim();
+      if (!userVal) {
+        input.focus();
+        return;
+      }
+
+      answeredCurrentFill = true;
+      input.disabled = true;
+      document.getElementById('fill-submit-btn').disabled = true;
+
+      const f = fillQuestions[currentFillIndex];
+      const validAnswers = [f.answer, ...(f.aliases || [])].map(a => a.toLowerCase().replace(/[\s,，、]/g, ''));
+      const cleanUserVal = userVal.toLowerCase().replace(/[\s,，、]/g, '');
+
+      const isCorrect = validAnswers.includes(cleanUserVal);
+
+      const feedback = document.getElementById('fill-feedback');
+      const title = document.getElementById('fill-feedback-title');
+      const desc = document.getElementById('fill-feedback-desc');
+      const icon = document.getElementById('fill-feedback-icon');
+
+      feedback.classList.remove('hidden', 'bg-emerald-50', 'border-emerald-200', 'bg-rose-50', 'border-rose-200');
+
+      if (isCorrect) {
+        soundCorrect();
+        fillScore++;
+        document.getElementById('fill-score-count').innerText = fillScore;
+
+        feedback.classList.add('bg-emerald-50', 'border-emerald-200');
+        icon.innerText = '🎯';
+        title.className = 'font-bold text-base mb-1 text-emerald-800';
+        title.innerText = '完全正確！詞彙掌握非常精確';
+        desc.innerText = f.desc;
+      } else {
+        soundWrong();
+        feedback.classList.add('bg-rose-50', 'border-rose-200');
+        icon.innerText = '📖';
+        title.className = 'font-bold text-base mb-1 text-rose-800';
+        title.innerText = `答錯囉！標準答案是：【${f.answer}】`;
+        desc.innerText = f.desc;
+      }
+    }
+
+    // 支援按下 Enter 鍵送出填空
+    document.getElementById('fill-input').addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        checkFillAnswer();
+      }
+    });
+
+    function nextFillQuestion() {
+      soundClick();
+      currentFillIndex++;
+      if (currentFillIndex < fillQuestions.length) {
+        renderFillQuestion();
+      } else {
+        showFillResults();
+      }
+    }
+
+    function showFillResults() {
+      document.getElementById('fill-card').classList.add('hidden');
+      const resCard = document.getElementById('fill-result-card');
+      resCard.classList.remove('hidden');
+      document.getElementById('fill-final-score').innerText = `${fillScore} / ${fillQuestions.length}`;
+    }
+
+    function restartFill() {
+      soundClick();
+      currentFillIndex = 0;
+      fillScore = 0;
+      document.getElementById('fill-score-count').innerText = 0;
+      document.getElementById('fill-card').classList.remove('hidden');
+      document.getElementById('fill-result-card').classList.add('hidden');
+      renderFillQuestion();
+    }
+
+    // --- 選擇題測驗邏輯 ---
+    let currentQuizIndex = 0;
+    let score = 0;
+    let streak = 0;
+    let maxStreak = 0;
+    let answeredCurrent = false;
+
+    function renderQuestion() {
+      answeredCurrent = false;
+      const q = quizData[currentQuizIndex];
+      document.getElementById('quiz-progress-text').innerText = `${currentQuizIndex + 1} / ${quizData.length}`;
+      document.getElementById('quiz-progress-bar').style.width = `${((currentQuizIndex + 1) / quizData.length) * 100}%`;
+      document.getElementById('quiz-tag').innerText = q.tag;
+      document.getElementById('quiz-question').innerText = `${currentQuizIndex + 1}. ${q.question}`;
+      
+      // 提示
+      const hintBox = document.getElementById('hint-box');
+      hintBox.classList.add('hidden');
+      hintBox.innerText = q.hint;
+      document.getElementById('hint-toggle-btn').innerHTML = '💡 觀念提示';
+
+      // 反饋區隱藏
+      document.getElementById('quiz-feedback').classList.add('hidden');
+
+      // 渲染選項
+      const optContainer = document.getElementById('quiz-options');
+      optContainer.innerHTML = '';
+
+      q.options.forEach((opt, idx) => {
+        const btn = document.createElement('button');
+        btn.className = 'w-full text-left p-4 rounded-2xl border-2 border-slate-200 hover:border-blue-400 hover:bg-blue-50/50 transition-all font-medium text-slate-700 flex items-center justify-between group';
+        btn.innerHTML = `
+          <div class="flex items-center gap-3">
+            <span class="w-7 h-7 rounded-lg bg-slate-100 group-hover:bg-blue-500 group-hover:text-white flex items-center justify-center font-bold text-xs text-slate-500 transition">
+              ${['A', 'B', 'C', 'D'][idx]}
+            </span>
+            <span class="text-sm sm:text-base">${opt.text}</span>
+          </div>
+          <span class="opt-indicator hidden text-lg"></span>
+        `;
+        btn.onclick = () => selectOption(idx, btn);
+        optContainer.appendChild(btn);
+      });
+    }
+
+    function toggleHint() {
+      soundClick();
+      const hintBox = document.getElementById('hint-box');
+      const isHidden = hintBox.classList.contains('hidden');
+      hintBox.classList.toggle('hidden');
+      document.getElementById('hint-toggle-btn').innerHTML = isHidden ? '🙈 隱藏提示' : '💡 觀念提示';
+    }
+
+    function selectOption(selectedIndex, selectedBtn) {
+      if (answeredCurrent) return;
+      answeredCurrent = true;
+
+      const q = quizData[currentQuizIndex];
+      const selected = q.options[selectedIndex];
+      const allButtons = document.getElementById('quiz-options').querySelectorAll('button');
+
+      allButtons.forEach((btn, idx) => {
+        btn.disabled = true;
+        if (q.options[idx].isCorrect) {
+          btn.classList.remove('border-slate-200');
+          btn.classList.add('border-emerald-500', 'bg-emerald-50', 'text-emerald-900');
+        }
+      });
+
+      const feedback = document.getElementById('quiz-feedback');
+      const title = document.getElementById('feedback-title');
+      const desc = document.getElementById('feedback-desc');
+      const icon = document.getElementById('feedback-icon');
+
+      feedback.classList.remove('hidden', 'bg-emerald-50', 'border-emerald-200', 'bg-rose-50', 'border-rose-200');
+
+      if (selected.isCorrect) {
+        soundCorrect();
+        score += 10;
+        streak++;
+        if (streak > maxStreak) maxStreak = streak;
+        document.getElementById('score-count').innerText = score;
+        document.getElementById('streak-count').innerText = streak;
+
+        selectedBtn.classList.add('border-emerald-500', 'bg-emerald-50');
+        feedback.classList.add('bg-emerald-50', 'border-emerald-200');
+        icon.innerText = '🎉';
+        title.className = 'font-bold text-base mb-1 text-emerald-800';
+        title.innerText = '完全正確！概念非常清晰';
+        desc.innerText = selected.rationale;
+      } else {
+        soundWrong();
+        streak = 0;
+        document.getElementById('streak-count').innerText = streak;
+
+        selectedBtn.classList.remove('border-slate-200');
+        selectedBtn.classList.add('border-rose-400', 'bg-rose-50', 'text-rose-900');
+
+        feedback.classList.add('bg-rose-50', 'border-rose-200');
+        icon.innerText = '💡';
+        title.className = 'font-bold text-base mb-1 text-rose-800';
+        title.innerText = '思考一下：這題選錯囉！';
+        desc.innerText = `${selected.rationale} 正確答案是：「${q.options.find(o => o.isCorrect).text}」`;
+      }
+    }
+
+    function nextQuestion() {
+      soundClick();
+      currentQuizIndex++;
+      if (currentQuizIndex < quizData.length) {
+        renderQuestion();
+      } else {
+        showResults();
+      }
+    }
+
+    function showResults() {
+      document.getElementById('quiz-card').classList.add('hidden');
+      const resCard = document.getElementById('quiz-result-card');
+      resCard.classList.remove('hidden');
+
+      document.getElementById('result-score').innerText = score;
+      document.getElementById('result-rate').innerText = `${Math.round((score / (quizData.length * 10)) * 100)}%`;
+      document.getElementById('result-streak').innerText = maxStreak;
+    }
+
+    function restartQuiz() {
+      soundClick();
+      currentQuizIndex = 0;
+      score = 0;
+      streak = 0;
+      maxStreak = 0;
+      document.getElementById('score-count').innerText = 0;
+      document.getElementById('streak-count').innerText = 0;
+      document.getElementById('quiz-card').classList.remove('hidden');
+      document.getElementById('quiz-result-card').classList.add('hidden');
+      renderQuestion();
+    }
+
+    // --- 歷史時序排排看邏輯 ---
+    function renderTimeline() {
+      const container = document.getElementById('timeline-list');
+      container.innerHTML = '';
+      timelineEvents.forEach((ev, idx) => {
+        const item = document.createElement('div');
+        item.className = 'flex items-center justify-between p-4 bg-slate-50 border border-slate-200 rounded-2xl hover:bg-slate-100 transition';
+        item.innerHTML = `
+          <div class="flex items-center gap-3">
+            <span class="w-7 h-7 rounded-lg bg-blue-100 text-blue-700 font-bold text-xs flex items-center justify-center">
+              ${idx + 1}
+            </span>
+            <span class="text-sm font-semibold text-slate-700">${ev.text}</span>
+          </div>
+          <div class="flex items-center gap-1">
+            <button onclick="moveTimeline(${idx}, -1)" ${idx === 0 ? 'disabled' : ''} class="p-1.5 rounded-lg bg-white border border-slate-200 text-slate-600 hover:bg-slate-100 disabled:opacity-30 disabled:pointer-events-none transition" title="上移">
+              ▲
+            </button>
+            <button onclick="moveTimeline(${idx}, 1)" ${idx === timelineEvents.length - 1 ? 'disabled' : ''} class="p-1.5 rounded-lg bg-white border border-slate-200 text-slate-600 hover:bg-slate-100 disabled:opacity-30 disabled:pointer-events-none transition" title="下移">
+              ▼
+            </button>
+          </div>
+        `;
+        container.appendChild(item);
+      });
+    }
+
+    function moveTimeline(index, direction) {
+      soundClick();
+      const targetIndex = index + direction;
+      if (targetIndex < 0 || targetIndex >= timelineEvents.length) return;
+      const temp = timelineEvents[index];
+      timelineEvents[index] = timelineEvents[targetIndex];
+      timelineEvents[targetIndex] = temp;
+      renderTimeline();
+      document.getElementById('timeline-result').classList.add('hidden');
+    }
+
+    function checkTimelineOrder() {
+      let isCorrect = true;
+      for (let i = 0; i < timelineEvents.length - 1; i++) {
+        if (timelineEvents[i].year > timelineEvents[i + 1].year) {
+          isCorrect = false;
+          break;
+        }
+      }
+
+      const res = document.getElementById('timeline-result');
+      res.classList.remove('hidden', 'bg-emerald-50', 'text-emerald-800', 'border-emerald-200', 'bg-rose-50', 'text-rose-800', 'border-rose-200');
+      res.classList.add('border');
+
+      if (isCorrect) {
+        soundCorrect();
+        res.classList.add('bg-emerald-50', 'text-emerald-800', 'border-emerald-200');
+        res.innerHTML = '🎉 太厲害了！你完全排對了：民國34年接收 ➔ 民國36年二二八 ➔ 民國68年美麗島 ➔ 民國76年解嚴 ➔ 民國85年總統直選！';
+      } else {
+        soundWrong();
+        res.classList.add('bg-rose-50', 'text-rose-800', 'border-rose-200');
+        res.innerHTML = '❌ 順序還有一點小瑕疵喔！請注意民國年代的大小先後，再調整一次試試看！';
+      }
+    }
+
+    // --- 權利義務快問快答邏輯 ---
+    let classifyIndex = 0;
+    function renderClassify() {
+      if (classifyIndex >= classifyItems.length) {
+        classifyIndex = 0;
+      }
+      const item = classifyItems[classifyIndex];
+      document.getElementById('classify-text').innerText = item.text;
+      document.getElementById('classify-feedback').innerText = '';
+    }
+
+    function handleClassify(userChoice) {
+      const item = classifyItems[classifyIndex];
+      const feedback = document.getElementById('classify-feedback');
+      if (userChoice === item.type) {
+        soundCorrect();
+        feedback.className = 'mt-4 text-sm font-bold text-emerald-600';
+        feedback.innerText = `答對了！這確實是【${item.type}】。${item.note}`;
+      } else {
+        soundWrong();
+        feedback.className = 'mt-4 text-sm font-bold text-rose-600';
+        feedback.innerText = `差一點點！這項應該是【${item.type}】才對。${item.note}`;
+      }
+
+      setTimeout(() => {
+        classifyIndex = (classifyIndex + 1) % classifyItems.length;
+        renderClassify();
+      }, 2200);
+    }
+
+    // --- 分頁切換邏輯 ---
+    function switchTab(tabName) {
+      soundClick();
+      ['notes', 'fill', 'quiz', 'timeline', 'classify'].forEach(t => {
+        const sec = document.getElementById(`section-${t}`);
+        const btn = document.getElementById(`tab-${t}`);
+        if (!sec || !btn) return;
+        if (t === tabName) {
+          sec.classList.remove('hidden');
+          btn.classList.add('border-blue-600', 'text-blue-600', 'font-bold');
+          btn.classList.remove('border-transparent', 'text-slate-500');
+        } else {
+          sec.classList.add('hidden');
+          btn.classList.remove('border-blue-600', 'text-blue-600', 'font-bold');
+          btn.classList.add('border-transparent', 'text-slate-500');
+        }
+      });
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // --- 彈跳視窗控制 ---
+    function openDeployModal() {
+      soundClick();
+      document.getElementById('deploy-modal').classList.remove('hidden');
+    }
+    function closeDeployModal() {
+      soundClick();
+      document.getElementById('deploy-modal').classList.add('hidden');
+    }
+
+    // 初始化啟動
+    window.addEventListener('DOMContentLoaded', () => {
+      renderFillQuestion();
+      renderQuestion();
+      renderTimeline();
+      renderClassify();
+    });
+  </script>
+</body>
+</html>
