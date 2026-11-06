@@ -103,17 +103,17 @@
     <div class="max-w-5xl mx-auto flex items-center justify-between flex-wrap gap-2">
       <div class="flex items-center gap-1 text-xs font-bold text-slate-600">
         <span>🎯 選擇複習單元：</span>
-        <span id="current-unit-badge" class="px-2 py-0.5 rounded-md bg-blue-100 text-blue-800 text-[11px]">全部範圍</span>
+        <span id="current-unit-badge" class="px-2 py-0.5 rounded-md bg-blue-100 text-blue-800 text-[11px] font-bold">第一單元：民主與憲法</span>
       </div>
       <div class="flex items-center gap-1.5 sm:gap-2">
-        <button onclick="setUnitFilter('all')" id="unit-btn-all" class="unit-btn px-3 py-1.5 rounded-xl text-xs sm:text-sm font-bold bg-blue-600 text-white shadow-xs transition">
-          全部單元 (1+2)
-        </button>
-        <button onclick="setUnitFilter(1)" id="unit-btn-1" class="unit-btn px-3 py-1.5 rounded-xl text-xs sm:text-sm font-semibold bg-white text-slate-600 hover:bg-slate-50 border border-slate-200 transition">
+        <button onclick="setUnitFilter(1)" id="unit-btn-1" class="unit-btn px-3 py-1.5 rounded-xl text-xs sm:text-sm font-bold bg-blue-600 text-white shadow-xs transition">
           📘 第一單元：民主政治與憲法
         </button>
         <button onclick="setUnitFilter(2)" id="unit-btn-2" class="unit-btn px-3 py-1.5 rounded-xl text-xs sm:text-sm font-semibold bg-white text-slate-600 hover:bg-slate-50 border border-slate-200 transition">
           📙 第二單元：變遷與多元族群
+        </button>
+        <button onclick="setUnitFilter('all')" id="unit-btn-all" class="unit-btn px-3 py-1.5 rounded-xl text-xs sm:text-sm font-semibold bg-white text-slate-600 hover:bg-slate-50 border border-slate-200 transition">
+          🎯 全部單元 (1+2 總複習)
         </button>
       </div>
     </div>
@@ -564,8 +564,8 @@
 
   <!-- 應用程式核心邏輯 JavaScript -->
   <script>
-    // --- 當前篩選單元狀態：'all' | 1 | 2 ---
-    let currentUnitFilter = 'all';
+    // --- 當前篩選單元狀態：1 | 2 | 'all' (預設先進入第一單元) ---
+    let currentUnitFilter = 1;
 
     // --- 填空題資料庫 (標註 unit: 1 或 2) ---
     const rawFillQuestions = [
@@ -808,8 +808,8 @@
     let quizData = [...rawQuizData];
 
     // --- 設定單元切換過濾 ---
-    function setUnitFilter(unit) {
-      soundClick();
+    function setUnitFilter(unit, isInit = false) {
+      if (!isInit) soundClick();
       currentUnitFilter = unit;
 
       // 更新按鈕外觀樣式
@@ -824,13 +824,7 @@
         b.className = 'unit-btn px-3 py-1.5 rounded-xl text-xs sm:text-sm font-semibold bg-white text-slate-600 hover:bg-slate-50 border border-slate-200 transition';
       });
 
-      if (unit === 'all') {
-        btnAll.className = 'unit-btn px-3 py-1.5 rounded-xl text-xs sm:text-sm font-bold bg-blue-600 text-white shadow-xs transition';
-        badge.innerText = '全部範圍 (1+2)';
-        badge.className = 'px-2 py-0.5 rounded-md bg-blue-100 text-blue-800 text-[11px] font-bold';
-        if (fillBadge) fillBadge.innerText = '全部單元';
-        if (quizBadge) quizBadge.innerText = '全部單元';
-      } else if (unit === 1) {
+      if (unit === 1) {
         btn1.className = 'unit-btn px-3 py-1.5 rounded-xl text-xs sm:text-sm font-bold bg-blue-600 text-white shadow-xs transition';
         badge.innerText = '第一單元：民主與憲法';
         badge.className = 'px-2 py-0.5 rounded-md bg-blue-100 text-blue-800 text-[11px] font-bold';
@@ -842,6 +836,12 @@
         badge.className = 'px-2 py-0.5 rounded-md bg-amber-100 text-amber-800 text-[11px] font-bold';
         if (fillBadge) fillBadge.innerText = '第二單元';
         if (quizBadge) quizBadge.innerText = '第二單元';
+      } else if (unit === 'all') {
+        btnAll.className = 'unit-btn px-3 py-1.5 rounded-xl text-xs sm:text-sm font-bold bg-purple-600 text-white shadow-xs transition';
+        badge.innerText = '全部範圍 (1+2 總複習)';
+        badge.className = 'px-2 py-0.5 rounded-md bg-purple-100 text-purple-800 text-[11px] font-bold';
+        if (fillBadge) fillBadge.innerText = '全部單元';
+        if (quizBadge) quizBadge.innerText = '全部單元';
       }
 
       // 控制重點筆記卡片的顯示
@@ -1340,8 +1340,7 @@
 
     // 初始化啟動
     window.addEventListener('DOMContentLoaded', () => {
-      renderFillQuestion();
-      renderQuestion();
+      setUnitFilter(1, true); // 預設由第一單元開始，單元1+2移至最後作為總複習
       renderTimeline();
       renderClassify();
     });
