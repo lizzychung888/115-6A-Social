@@ -74,47 +74,53 @@
     .btn-archive { background: #f1f5f9; border: 1px solid #cbd5e1; color: #64748b; font-size: 11px; padding: 4px 8px; border-radius: 6px; }
     .btn-archive:hover { background: #e2e8f0; color: #334155; }
 
-    .nav-bar-container {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin: 8px 0;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
-
-    .subject-tabs { display: flex; gap: 6px; overflow-x: auto; padding-bottom: 2px; }
-    .sub-btn { background: #fff; color: #64748b; border: 1px solid #f1f5f9; padding: 5px 11px; border-radius: 10px; font-size: 11px; white-space: nowrap; }
+    .subject-tabs { display: flex; gap: 6px; overflow-x: auto; margin: 8px 0 6px 0; padding-bottom: 2px; }
+    .sub-btn { background: #fff; color: #64748b; border: 1px solid #f1f5f9; padding: 6px 12px; border-radius: 10px; font-size: 11px; white-space: nowrap; font-weight: 600; }
     .sub-btn.active { background: #fb7185; color: #ffffff; border-color: #fb7185; box-shadow: 0 2px 4px rgba(251, 113, 133, 0.2); }
 
-    /* 階段切換按鈕區 */
-    .period-switch {
+    /* 獨立醒目的段考切換控制條 */
+    .period-bar {
       display: flex;
-      background: #f1f5f9;
-      padding: 2px;
-      border-radius: 10px;
-      gap: 2px;
-      border: 1px solid #e2e8f0;
+      align-items: center;
+      justify-content: space-between;
+      background: #ffffff;
+      border: 1px solid #fecdd3;
+      border-radius: 8px;
+      padding: 6px 12px;
+      margin-bottom: 6px;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .period-btn-group {
+      display: flex;
+      gap: 6px;
+      align-items: center;
     }
     .period-btn {
-      background: transparent;
-      color: #64748b;
-      padding: 4px 12px;
+      padding: 5px 14px;
       border-radius: 8px;
       font-size: 11px;
-      border: none;
+      font-weight: bold;
+      border: 1px solid #cbd5e1;
+      background: #f8fafc;
+      color: #64748b;
+      cursor: pointer;
+      transition: all 0.15s;
     }
     .period-btn.active {
-      background: #ffffff;
-      color: #e11d48;
-      font-weight: bold;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+      background: #e11d48;
+      color: #ffffff;
+      border-color: #e11d48;
+      box-shadow: 0 2px 4px rgba(225, 29, 72, 0.25);
     }
-    .period-btn.full-year-mode {
+    .badge-full-year {
       background: #fdf2f8;
       color: #db2777;
+      border: 1px solid #fbcfe8;
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 11px;
       font-weight: bold;
-      cursor: default;
     }
 
     .cat-bar {
@@ -127,7 +133,7 @@
 
     .table-container {
       background: #ffffff; border: 1px solid #fecdd3; border-radius: 10px;
-      overflow: auto; max-height: calc(100vh - 165px); box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+      overflow: auto; max-height: calc(100vh - 180px); box-shadow: 0 1px 3px rgba(0,0,0,0.02);
     }
     table { width: 100%; border-collapse: separate; border-spacing: 0; table-layout: fixed; }
 
@@ -153,7 +159,7 @@
     th.item-col:hover .del-btn { display: flex; }
     .del-btn:hover { color: #f43f5e; background: #fff; }
 
-    th.total-col { width: 70px; background: #ffe4e6; color: #e11d48; border-left: 1px solid #fda4af; text-align: center; position: sticky; top: 0; z-index: 20; }
+    th.total-col { width: 72px; background: #ffe4e6; color: #e11d48; border-left: 1px solid #fda4af; text-align: center; position: sticky; top: 0; z-index: 20; }
 
     tbody td.seat-cell { position: sticky; left: 0; background: #f8fafc; font-weight: bold; font-size: 12px; color: #475569; text-align: center; border-right: 1px solid #ffe4e6; border-bottom: 1px solid #f1f5f9; z-index: 10; padding: 3px; }
     tr.itinerant td.seat-cell { background: #f5f3ff; color: #6b21a8; }
@@ -252,9 +258,16 @@
     </div>
   </div>
 
-  <div class="nav-bar-container">
-    <div class="subject-tabs" id="subjectTabs"></div>
-    <div class="period-switch" id="periodSwitchContainer"></div>
+  <!-- 科目切換列 -->
+  <div class="subject-tabs" id="subjectTabs"></div>
+
+  <!-- 獨立的期中/期末切換列（明確顯眼） -->
+  <div class="period-bar">
+    <div style="display:flex; align-items:center; gap:8px;">
+      <span style="font-size:12px; font-weight:bold; color:#1e293b;">目前評量階段：</span>
+      <div class="period-btn-group" id="periodControls"></div>
+    </div>
+    <button class="btn-outline" onclick="sortItemsByTime()" title="最新項目靠座號（新到舊排序）">⏱️ 依建立時間（新→舊）</button>
   </div>
 
   <div class="cat-bar" id="categoryBar"></div>
@@ -345,7 +358,7 @@
     const ITINERANTS = ['02', '22', '23'];
 
     let activeSubId = 'math';
-    let activeExamPeriod = 'mid'; // 'mid' (期中) 或 'final' (期末)，僅國語/數學使用
+    let activeExamPeriod = 'mid'; // 'mid' (期中) 或 'final' (期末)
     let draggedItemIdx = null;
     let pendingBackupData = null;
     let activeInputEl = null;
@@ -353,13 +366,12 @@
     let termData = {}; 
     let currentTerm = '115-1';
 
-    // 取得當前科目真正對應的資料 key ('mid' / 'final' / 'full')
     function getPeriodKey() {
       const sub = SUBJECTS.find(function(s) { return s.id === activeSubId; });
       if (sub && sub.hasExamPeriods) {
         return activeExamPeriod;
       }
-      return 'full'; // 非國語數學，全學年統一存於 'full'
+      return 'full';
     }
 
     function ensureStructure(tName) {
@@ -487,15 +499,15 @@
       save();
       renderTermSelector();
       renderTabs();
-      renderPeriodSwitch();
+      renderPeriodControls();
       renderCategoryBar();
       renderTable();
       showToast('已切換至 ' + termName);
     }
 
-    // ==== 渲染階段切換區（國數：期中期末切換；其他科：全學期標籤）====
-    function renderPeriodSwitch() {
-      const container = document.getElementById('periodSwitchContainer');
+    // 渲染期中/期末切換控制列
+    function renderPeriodControls() {
+      const container = document.getElementById('periodControls');
       const sub = SUBJECTS.find(function(s) { return s.id === activeSubId; }) || SUBJECTS[0];
 
       if (sub.hasExamPeriods) {
@@ -503,13 +515,13 @@
           '<button class="period-btn ' + (activeExamPeriod === 'mid' ? 'active' : '') + '" onclick="switchExamPeriod(\'mid\')">📝 期中平時</button>' +
           '<button class="period-btn ' + (activeExamPeriod === 'final' ? 'active' : '') + '" onclick="switchExamPeriod(\'final\')">🎯 期末平時</button>';
       } else {
-        container.innerHTML = '<button class="period-btn full-year-mode">🌟 全學期評量 (單一階段)</button>';
+        container.innerHTML = '<span class="badge-full-year">🌟 全學期評量 (單一階段，不分期中期末)</span>';
       }
     }
 
     function switchExamPeriod(p) {
       activeExamPeriod = p;
-      renderPeriodSwitch();
+      renderPeriodControls();
       renderCategoryBar();
       renderTable();
       showToast('切換至' + (p === 'mid' ? '「期中平時」' : '「期末平時」'));
@@ -542,7 +554,7 @@
       closeNewTermModal();
       renderTermSelector();
       renderTabs();
-      renderPeriodSwitch();
+      renderPeriodControls();
       renderCategoryBar();
       renderTable();
       showToast('成功建立新學期：' + name);
@@ -562,7 +574,7 @@
     function init() {
       renderTermSelector();
       renderTabs();
-      renderPeriodSwitch();
+      renderPeriodControls();
       renderCategoryBar();
       renderTable();
 
@@ -583,7 +595,7 @@
         btn.onclick = function() { 
           activeSubId = sub.id; 
           renderTabs(); 
-          renderPeriodSwitch();
+          renderPeriodControls();
           renderCategoryBar(); 
           renderTable(); 
         };
@@ -603,8 +615,7 @@
         periodLabel = activeExamPeriod === 'mid' ? '【期中平時】' : '【期末平時】';
       }
 
-      bar.innerHTML = '<div class="cat-tag-container"><strong style="color:#e11d48;">' + periodLabel + ' 評量配比：</strong>' + tagsHTML + '</div>' + 
-                      '<button class="btn-outline" onclick="sortItemsByTime()" title="最新項目靠座號（新到舊排序）">⏱️ 依建立時間（新→舊）</button>';
+      bar.innerHTML = '<div class="cat-tag-container"><strong style="color:#e11d48;">' + periodLabel + ' 評量配比：</strong>' + tagsHTML + '</div>';
     }
 
     function sortItemsByTime() {
@@ -870,7 +881,7 @@
           const headers = parseCsvRow(rawLines[0]);
           const sub = SUBJECTS.find(function(s) { return s.id === activeSubId; }) || SUBJECTS[0];
 
-          const ignoreCols = ['座號', '身分', '身份', '身分/類別', '類別', '平時總成績', '期中總計', '期末總計', '全學年總計', '總成績', '總計', '性別', '姓名'];
+          const ignoreCols = ['座號', '身分', '身份', '身分/類別', '類別', '平時總成績', '期中平時總成績', '期末平時總成績', '全學年平時總成績', '期中總計', '期末總計', '全學年總計', '總成績', '總計', '性別', '姓名'];
           const itemColIndices = [];
 
           const assessments = getAssessments();
@@ -885,4 +896,315 @@
             }
           });
 
-          if (itemColIndices.length ===
+          if (itemColIndices.length === 0) { alert('未在 CSV 第一列中找到可匯入的成績欄位！'); return; }
+
+          const defaultCatId = sub.categories[0] ? sub.categories[0].id : '';
+          const itemMap = [];
+
+          itemColIndices.forEach(function(info) {
+            let existingItem = null;
+            for (let i = 0; i < currentItems.length; i++) {
+              if (currentItems[i].name === info.headerName) { existingItem = currentItems[i]; break; }
+            }
+            if (!existingItem) {
+              existingItem = {
+                id: 'item_' + Date.now() + '_' + Math.floor(Math.random() * 1000),
+                name: info.headerName,
+                categoryId: defaultCatId,
+                maxScore: 100,
+                locked: false
+              };
+              currentItems.unshift(existingItem);
+            }
+            itemMap.push({ colIdx: info.colIdx, itemId: existingItem.id, locked: existingItem.locked });
+          });
+
+          let importCount = 0;
+          for (let i = 1; i < rawLines.length; i++) {
+            if (!rawLines[i].trim()) continue;
+            const cols = parseCsvRow(rawLines[i]);
+            if (cols.length === 0) continue;
+
+            let seatNum = null;
+            for (let c = 0; c < Math.min(2, cols.length); c++) {
+              const m = cols[c].match(/\d+/);
+              if (m) {
+                const val = parseInt(m[0], 10);
+                if (val >= 1 && val <= 25) { seatNum = val; break; }
+              }
+            }
+            if (!seatNum) continue;
+            const seat = String(seatNum).padStart(2, '0');
+
+            itemMap.forEach(function(m) {
+              if (m.locked) return;
+              const scoreVal = cols[m.colIdx];
+              if (scoreVal !== undefined && scoreVal !== '') {
+                if (!scores[m.itemId]) scores[m.itemId] = {};
+                scores[m.itemId][seat] = scoreVal;
+                importCount++;
+              }
+            });
+          }
+
+          save(); renderTable();
+          const pName = sub.hasExamPeriods ? (activeExamPeriod === 'mid' ? '期中' : '期末') : '全學期';
+          showToast('成功匯入 ' + importCount + ' 筆成績至「' + pName + '」！');
+        } catch (err) { alert('CSV 解析失敗：' + err.message); }
+      };
+      reader.readAsArrayBuffer(file);
+      e.target.value = '';
+    }
+
+    function changeItemCategory(itemId, newCatId) {
+      if (isCurrentArchived()) return;
+      const assessments = getAssessments();
+      if (!assessments[activeSubId]) return;
+      const list = assessments[activeSubId];
+      for (let i = 0; i < list.length; i++) {
+        if (list[i].id === itemId) { list[i].categoryId = newCatId; break; }
+      }
+      save(); renderTable();
+    }
+
+    function calcTotal(seat, sub, items) {
+      if (!items || items.length === 0) return '-';
+      let total = 0, validWeight = 0;
+      const scores = getScores();
+      const leaveKeywords = ['請假', '請', '病假', '事假', '公假'];
+
+      sub.categories.forEach(function(cat) {
+        const catItems = items.filter(function(it) { return it.categoryId === cat.id; });
+        if (catItems.length === 0) return;
+        let sum = 0, count = 0;
+        catItems.forEach(function(it) {
+          const raw = (scores[it.id] || {})[seat];
+          if (raw !== undefined && raw !== '' && leaveKeywords.indexOf(raw) === -1) {
+            if (raw === '未交' || raw === '未') {
+              sum += 0;
+              count++;
+            } else if (!isNaN(raw)) {
+              sum += (Number(raw) / it.maxScore) * 100;
+              count++;
+            }
+          }
+        });
+        if (count > 0) { total += (sum / count) * (cat.weight / 100); validWeight += cat.weight; }
+      });
+      if (validWeight === 0) return '-';
+      return ((total / validWeight) * 100).toFixed(2);
+    }
+
+    function onScoreInput(el) {
+      if (isCurrentArchived()) return;
+      const itemId = el.getAttribute('data-item');
+      const seat = el.getAttribute('data-seat');
+      let val = el.value.trim();
+
+      if (val === '未') val = '未交';
+      if (val === '請') val = '請假';
+      el.value = val;
+
+      const scores = getScores();
+      if (!scores[itemId]) scores[itemId] = {};
+      scores[itemId][seat] = val;
+      save();
+
+      el.className = getScoreClass(val);
+
+      const sub = SUBJECTS.find(function(s) { return s.id === activeSubId; }) || SUBJECTS[0];
+      const items = getAssessments()[activeSubId] || [];
+      const totalEl = document.getElementById('total-' + seat);
+      if (totalEl) totalEl.textContent = calcTotal(seat, sub, items);
+    }
+
+    function onKeyNav(e, col, row) {
+      let targetCol = col, targetRow = row, move = false;
+      if (e.key === 'Enter' || e.key === 'ArrowDown') { targetRow = row + 1; move = true; }
+      else if (e.key === 'ArrowUp') { targetRow = row - 1; move = true; }
+      else if (e.key === 'ArrowRight') { targetCol = col + 1; move = true; }
+      else if (e.key === 'ArrowLeft') { targetCol = col - 1; move = true; }
+
+      if (move) {
+        const next = document.querySelector('input[data-col="' + targetCol + '"][data-row="' + targetRow + '"]');
+        if (next && !next.disabled) { e.preventDefault(); next.focus(); next.select(); }
+      }
+    }
+
+    function openModal() {
+      if (isCurrentArchived()) return alert('目前學期已封存，無法新增評量！');
+      const sub = SUBJECTS.find(function(s) { return s.id === activeSubId; }) || SUBJECTS[0];
+      let optHTML = '';
+      sub.categories.forEach(function(c) { optHTML += '<option value="' + c.id + '">' + c.name + ' (' + c.weight + '%)</option>'; });
+      document.getElementById('modalCat').innerHTML = optHTML;
+      document.getElementById('modalName').value = '';
+      document.getElementById('modalMax').value = '100';
+      
+      let pText = '🌟 全學期評量';
+      if (sub.hasExamPeriods) {
+        pText = activeExamPeriod === 'mid' ? '📝 期中平時' : '🎯 期末平時';
+      }
+      document.getElementById('modalPeriodText').textContent = pText;
+      document.getElementById('addModal').classList.add('open');
+      document.getElementById('modalName').focus();
+    }
+    function closeModal() { document.getElementById('addModal').classList.remove('open'); }
+    
+    function confirmAddItem() {
+      const name = document.getElementById('modalName').value.trim();
+      const catId = document.getElementById('modalCat').value;
+      const maxScore = Number(document.getElementById('modalMax').value) || 100;
+      if (!name) return alert('請輸入評量名稱');
+      const assessments = getAssessments();
+      if (!assessments[activeSubId]) assessments[activeSubId] = [];
+      
+      assessments[activeSubId].unshift({ id: 'item_' + Date.now(), name: name, categoryId: catId, maxScore: maxScore, locked: false });
+      save(); closeModal(); renderTable();
+      showToast('新增成功（已置於最左側）！');
+    }
+
+    function deleteItem(itemId) {
+      if (isCurrentArchived()) return alert('目前學期已封存，無法刪除！');
+      if (!confirm('確定要刪除此項目與所有分數嗎？')) return;
+      const assessments = getAssessments();
+      const scores = getScores();
+      assessments[activeSubId] = assessments[activeSubId].filter(function(it) { return it.id !== itemId; });
+      delete scores[itemId];
+      save(); renderTable();
+      showToast('已刪除評量。');
+    }
+
+    function handleBackup() {
+      const payload = {
+        termData: termData,
+        activeTerm: currentTerm,
+        backupDate: new Date().toLocaleString()
+      };
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' }));
+      a.download = '班級全學期成績備份_' + new Date().toISOString().slice(0, 10) + '.json';
+      a.click();
+    }
+
+    function handleRestore(e) {
+      const file = e.target.files && e.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = function(evt) {
+        try {
+          const data = JSON.parse(evt.target.result);
+          if (data.termData) {
+            pendingBackupData = data;
+            document.getElementById('mergeModal').classList.add('open');
+          } else { alert('檔案格式錯誤，不是合法的成績備份檔！'); }
+        } catch (err) { alert('讀取失敗，請確認檔案格式。'); }
+      };
+      reader.readAsText(file);
+      e.target.value = '';
+    }
+
+    function cancelRestore() {
+      pendingBackupData = null;
+      document.getElementById('mergeModal').classList.remove('open');
+    }
+
+    function applyRestore(isMerge) {
+      if (!pendingBackupData || !pendingBackupData.termData) return;
+      const incomingTerms = pendingBackupData.termData;
+
+      if (!isMerge) {
+        termData = incomingTerms;
+        Object.keys(termData).forEach(function(t) { ensureStructure(t); });
+        if (!termData[currentTerm]) currentTerm = Object.keys(termData)[0];
+        showToast('已完全還原為檔案內容！');
+      } else {
+        Object.keys(incomingTerms).forEach(function(tName) {
+          ensureStructure(tName);
+          const incTerm = incomingTerms[tName];
+          if (!incTerm.periods) return;
+
+          ['mid', 'final', 'full'].forEach(function(pKey) {
+            if (!incTerm.periods[pKey]) return;
+            const curAssess = termData[tName].periods[pKey].assessments;
+            const incAssess = incTerm.periods[pKey].assessments || {};
+            const curScores = termData[tName].periods[pKey].scores;
+            const incScores = incTerm.periods[pKey].scores || {};
+
+            Object.keys(incAssess).forEach(function(subId) {
+              if (!curAssess[subId]) curAssess[subId] = [];
+              const currentList = curAssess[subId];
+              const incomingList = incAssess[subId] || [];
+
+              incomingList.forEach(function(incItem) {
+                let matched = null;
+                for (let i = 0; i < currentList.length; i++) {
+                  if (currentList[i].id === incItem.id || currentList[i].name === incItem.name) {
+                    matched = currentList[i];
+                    break;
+                  }
+                }
+                if (!matched) {
+                  currentList.unshift(incItem);
+                  if (incScores[incItem.id]) {
+                    curScores[incItem.id] = Object.assign({}, incScores[incItem.id]);
+                  }
+                } else {
+                  const incScoreMap = incScores[incItem.id] || {};
+                  if (!curScores[matched.id]) curScores[matched.id] = {};
+                  Object.keys(incScoreMap).forEach(function(seat) {
+                    if (incScoreMap[seat] !== undefined && incScoreMap[seat] !== '') {
+                      curScores[matched.id][seat] = incScoreMap[seat];
+                    }
+                  });
+                }
+              });
+            });
+          });
+        });
+        showToast('✨ 智慧合併完成！所有科目與階段已成功對齊。');
+      }
+
+      save();
+      renderTermSelector();
+      renderTabs();
+      renderPeriodControls();
+      renderCategoryBar();
+      renderTable();
+      cancelRestore();
+    }
+
+    function exportCSV() {
+      const sub = SUBJECTS.find(function(s) { return s.id === activeSubId; }) || SUBJECTS[0];
+      const assessments = getAssessments();
+      const scores = getScores();
+      const items = assessments[activeSubId] || [];
+
+      let periodLabel = '全學年';
+      if (sub.hasExamPeriods) {
+        periodLabel = activeExamPeriod === 'mid' ? '期中' : '期末';
+      }
+
+      let csv = '\uFEFF座號,身分';
+      items.forEach(function(it) { csv += ',' + it.name; });
+      csv += ',' + periodLabel + '平時總成績\n';
+
+      STUDENTS.forEach(function(seat) {
+        const isIt = ITINERANTS.indexOf(seat) !== -1 ? '巡迴班' : '普通班';
+        let line = seat + '號,' + isIt;
+        items.forEach(function(it) {
+          const s = (scores[it.id] && scores[it.id][seat] !== undefined) ? scores[it.id][seat] : '';
+          line += ',' + s;
+        });
+        line += ',' + calcTotal(seat, sub, items) + '\n';
+        csv += line;
+      });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(new Blob([csv], { type: 'text/csv;charset=utf-8;' }));
+      a.download = currentTerm + '_' + periodLabel + '_' + sub.name + '_平時成績.csv';
+      a.click();
+    }
+
+    init();
+  </script>
+</body>
+</html>
